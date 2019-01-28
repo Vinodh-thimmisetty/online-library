@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="LOGS" value="./logs"/>
+
+    <appender name="Console"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %black(%d{yyyy-MM-dd HH:mm:ss}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable
+            </Pattern>
+        </layout>
+    </appender>
+
+    <appender name="RollingFile"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/online-library.log</file>
+        <encoder
+                class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+        </encoder>
+
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily and when the file reaches 10 MegaBytes -->
+            <fileNamePattern>${LOGS}/archived/online-library-%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <springProfile name="dev,test">
+        <!-- LOG everything at INFO level -->
+        <root level="info">
+            <appender-ref ref="RollingFile"/>
+            <appender-ref ref="Console"/>
+        </root>
+
+        <!-- LOG "com.vinodh.*" at INFO level without duplicate log messages-->
+        <logger name="com.vinodh" level="info" additivity="false">
+            <appender-ref ref="RollingFile"/>
+            <appender-ref ref="Console"/>
+        </logger>
+    </springProfile>
+
+    <springProfile name="stage,prod">
+        <!-- LOG everything at INFO level -->
+        <root level="error">
+            <appender-ref ref="RollingFile"/>
+            <appender-ref ref="Console"/>
+        </root>
+
+        <!-- LOG "com.vinodh.*" at INFO level without duplicate log messages-->
+        <logger name="com.vinodh" level="error" additivity="false">
+            <appender-ref ref="RollingFile"/>
+            <appender-ref ref="Console"/>
+        </logger>
+    </springProfile>
+
+
+</configuration>
