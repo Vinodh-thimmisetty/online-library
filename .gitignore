@@ -1,5 +1,6 @@
 /target/
 /bin/
+/logs/
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
@@ -19,8 +20,6 @@
 .settings
 .classpath
 .project
-online-library.iml
-
 
 ### NetBeans ###
 /nbproject/private/

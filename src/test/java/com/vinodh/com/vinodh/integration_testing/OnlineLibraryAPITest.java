@@ -3,6 +3,7 @@ package com.vinodh.com.vinodh.integration_testing;
 import com.vinodh.dto.Homepage;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import java.net.URISyntaxException;
 /**
  * @author thimmv
  */
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class OnlineLibraryAPITest {
