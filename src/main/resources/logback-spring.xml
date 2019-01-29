@@ -35,13 +35,11 @@
     <springProfile name="dev,test">
         <!-- LOG everything at INFO level -->
         <root level="info">
-            <appender-ref ref="RollingFile"/>
             <appender-ref ref="Console"/>
         </root>
 
         <!-- LOG "com.vinodh.*" at INFO level without duplicate log messages-->
         <logger name="com.vinodh" level="info" additivity="false">
-            <appender-ref ref="RollingFile"/>
             <appender-ref ref="Console"/>
         </logger>
     </springProfile>

@@ -33,13 +33,7 @@ public class OaAuth2Test {
     public void getOAuth2Code() {
         ResponseEntity<String> response = testRestTemplate
                 .withBasicAuth("thimmv", "Vin@5052#Vin")
-                .getForEntity("https://fedlogin.cat.com/as/authorization.oauth2?" +
-                                "client_id=sitesolution_client&" +
-                                "response_type=code&" +
-                                "pfidpadapterid=OAuthAdapterCCDS&" +
-                                "scope=openid%20profile&" +
-                                "state=ex78pky4&" +
-                                "redirect-uri=x-caterpillar-sitesolution://oauth2/authorize",
+                .getForEntity("",
                         String.class);
 
         System.out.println(response.getBody());
